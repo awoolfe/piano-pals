@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- basic.html -->
+    <title>index.html</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+
+      body {
+        font-family: "Roboto", sans-serif;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      ul {
+        list-style: none;
+        display: flex;
+      }
+
+      .piano_div {
+        line-height: 2;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      ul .key {
+        position: relative;
+        width: 60px;
+        height: 180px;
+        border: 1px solid black;
+        border-right: none;
+        background: #fffff0;
+        border-radius: 5px;
+        box-shadow: 0px 3px 5px #666;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 10px;
+        font-weight: bold;
+      }
+      ul .key:last-child {
+        border-right: 1px solid black;
+      }
+      ul .black-key {
+        position: absolute;
+        top: -1px;
+        left: 37.5px;
+        width: 45px;
+        height: 120px;
+        background: black;
+        border-radius: 5px;
+        box-shadow: 0px 3px 5px #666;
+        z-index: 999;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 10px;
+        color: white;
+      }
+      ul .active {
+        box-shadow: 0px 1px 3px #666;
+      }
+
+      /* Dropdown Button */
+      .dropbtn {
+        background-color: #3498DB;
+        color: white;
+        padding: 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Dropdown button on hover & focus */
+      .dropbtn:hover,
+      .dropbtn:focus {
+        background-color: #2980B9;
+      }
+
+      /* The container <div> - needed to position the dropdown content */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Dropdown Content (Hidden by Default) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 150px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      /* Links inside the dropdown */
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      /* Change color of dropdown links on hover */
+      .dropdown-content a:hover {
+        background-color: #ddd;
+      }
+
+      /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+      .show {
+        display: block;
+      }
+
+      .playing {
+        transform: scale(0.95);
+        border-color: #028ae9;
+        box-shadow: 0 0 1rem #028ae9;
+      }
+      
+      .key_pressed { 
+        border: "3px solid black"
+      }
+      
+      
+    </style>
+
+    
+    
+    
+    <script src="https://unpkg.com/tone@latest/build/Tone.js"></script>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <section>
+      <header>
+        <h1>Piano Pals</h1>
+        <h2>Use your keyboard.</h2>
+        <h3>Send link to a friend: (LINK).</h3>
+      </header>
+
+      <div class="dropdown">
+        <button onclick="chooseEffect()" class="dropbtn">Choose effect:</button>
+        <div id="choose_effect_button" class="dropdown-content">
+          <a href="#">Synth</a>
+          <a href="#">Monosynth</a>
+          <a href="#">Plucksynth</a>
+        </div>
+      </div>
+
+      <div class="piano_div">
+        <ul id="piano">
+          <li data-note="C4" class="key">
+            <div data-note="C#4" class="black-key">1</div>
+            Q
+          </li>
+          <li data-note="D4" class="key">
+            <div data-note="D#4" class="black-key">2</div>
+            W
+          </li>
+          <li data-note="E4" class="key">
+            E
+          </li>
+          <li data-note="F4" class="key">
+            <div data-note="F#4" class="black-key">3</div>
+            R
+          </li>
+          <li data-note="G4" class="key">
+            <div data-note="G#4" class="black-key">4</div>
+            T
+          </li>
+          <li data-note="A4" class="key">
+            <div data-note="A#4" class="black-key">5</div>
+            Y
+          </li>
+          <li data-note="B4" class="key">
+            U
+          </li>
+
+          <li data-note="C5" class="key">
+            <div data-note="C#5" class="black-key">6</div>
+            I
+          </li>
+          <li data-note="D5" class="key">
+            <div data-note="D#5" class="black-key">7</div>
+            O
+          </li>
+          <li data-note="E5" class="key">
+            P
+          </li>
+          <li data-note="F5" class="key">
+            <div data-note="F#5" class="black-key">8</div>
+            [
+          </li>
+          <li data-note="G5" class="key">
+            <div data-note="G#5" class="black-key">9</div>
+            ]
+          </li>
+          <li data-note="A5" class="key">
+            <div data-note="A#5" class="black-key">O</div>
+            -
+          </li>
+          <li data-note="B5" class="key">
+            =
+          </li>
+        </ul>
+      </div>
+    </section>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/static/game.js"></script>
+</html>
